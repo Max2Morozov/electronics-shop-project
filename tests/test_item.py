@@ -1,4 +1,3 @@
-
 import pytest
 import os
 from src.item import Item, InstantiateCSVError
@@ -49,9 +48,30 @@ def test_instantiate_from_csv():
 
 
 def test_instantiate_from_csv():
-
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv(path_to_csv=r"../src/item.csv")
 
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv(path_to_csv=r"../src/items.csv")
+
+
+def test__repr__():
+    """
+    Тест магического метода repr
+    """
+    data.name = 'Смартфон'
+    assert repr(data) == "Item('Смартфон', 10000, 20)"
+
+
+def test_add():
+    item2 = Item("Название товара", 1000, 5)
+    assert item2 + item2 == 10
+
+
+def test__str__():
+    data.name = "Смартфон"
+    """
+    Тест магического метода str
+    """
+
+    assert str(data) == 'Смартфон'
