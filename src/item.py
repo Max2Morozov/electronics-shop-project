@@ -34,10 +34,6 @@ class Item:
         Item.all.append(self)
         self.all.append(self)
 
-    def __repr__(self):
-        """Выводит объект для разработчика"""
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -85,3 +81,18 @@ class Item:
     def string_to_number(number):
         """статический метод, возвращающий число из числа-строки"""
         return int(float(number))
+
+    """Магические методы  repr и str"""
+
+    def __repr__(self):
+        """Выводит объект для разработчика"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return self.__name
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise ValueError("Cannot add Phone with non-Phone instances")
